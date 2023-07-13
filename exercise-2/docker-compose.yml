@@ -1,0 +1,65 @@
+version: '3.7'
+services:
+
+  backend:
+    container_name: deployBackend
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      PORT: ${PORT}
+      DB_HOST: ${DB_HOST}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      RETRIES_CALL_API: ${RETRIES_CALL_API}
+      RETRIES_PUBLISH_MESSAGES: ${RETRIES_PUBLISH_MESSAGES}
+      BASE_URL: ${BASE_URL}
+      TOKEN_SECRET_KEY: ${TOKEN_SECRET_KEY}
+    ports:
+      - '3001:3001'
+    links:
+      - database
+    depends_on:
+      - rabbitmq       
+
+  database:
+    container_name: deployDatabase
+    restart: always
+    image: postgres:14.0-alpine # Usa la imagen de Postgres desde Docker Hub
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD} # Tomado del archivo .env
+      POSTGRES_DB: postgres
+    ports:
+      - '5432:5432'
+
+  frontend:
+    container_name: deployFrontend
+    restart: always
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_WHAREHOUSE_ID: ${VITE_WHAREHOUSE_ID}
+        VITE_MERCHANT_ID: ${VITE_MERCHANT_ID}
+        VITE_CLIENT_ID: ${VITE_CLIENT_ID}
+        VITE_CLIENT_SECRET: ${VITE_CLIENT_SECRET}
+        VITE_BASE_URL: ${VITE_BASE_URL}      
+    environment:
+      VITE_WHAREHOUSE_ID: ${VITE_WHAREHOUSE_ID}
+      VITE_MERCHANT_ID: ${VITE_MERCHANT_ID}
+      VITE_CLIENT_ID: ${VITE_CLIENT_ID}
+      VITE_CLIENT_SECRET: ${VITE_CLIENT_SECRET}
+      VITE_BASE_URL: ${VITE_BASE_URL}
+    ports:
+      - '3000:3000'
+
+  rabbitmq:
+    image: 'rabbitmq:3.12-management'
+    container_name: deployRabbitmq
+    restart: always
+    ports:
+      - '5672:5672'
+      - '15672:15672'
