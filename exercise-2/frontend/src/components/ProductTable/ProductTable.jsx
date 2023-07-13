@@ -16,7 +16,7 @@ const StyledDataGrid = styled(DataGrid)({
 const initialRows = [
   { id: 1, code: 'C001', product: 'Producto 1', quantity: 10 },
   { id: 2, code: 'C002', product: 'Producto 2', quantity: 5 },
-  { id: 3, code: 'C003', product: 'Producto 3', quantity: 20 },
+  { id: 3, code: 'C003', product: 'Producto 3.1', quantity: 20 },
   // Agrega más filas si es necesario...
 ];
 
