@@ -1,4 +1,4 @@
-export const massiveUpdateProducts = async () => {
+export const massiveUpdateProducts = async (code) => {
   try {
     const url = `${import.meta.env.VITE_BASE_URL}/products/massive-update-stock`;
 
@@ -8,6 +8,7 @@ export const massiveUpdateProducts = async () => {
       "Client-Secret": import.meta.env.VITE_CLIENT_SECRET,
       "Merchant-Id": import.meta.env.VITE_MERCHANT_ID,
       "Warehouse-Id": import.meta.env.VITE_WHAREHOUSE_ID,
+      Code: code,
     };
 
     const response = await fetch(url, {

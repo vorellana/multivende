@@ -3,7 +3,7 @@ const rascalConfig = {
   vhosts: {
     "/": {
       connection: {
-        hostname: "localhost",
+        hostname: "rabbitmq", // en ambiente local o desarrollo es: localhost
       },
       exchanges: ["direct-exchange"],
       queues: [
