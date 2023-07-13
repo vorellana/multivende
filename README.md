@@ -31,7 +31,7 @@ Para el presente proyecto se utilizarón las siguientes tecnologías como librer
 * **Express:** Infraestructura web rápida, minimalista y flexible para Node.js. 
 * **Rascal:** Libería con mejores funcionalidades sobre amqplib. 
 * **Socket.IO:** Comunicación bidireccional y de baja latencia para todas las plataformas. 
-* **Bottleneck:**Programador de tareas y limitador de velocidad. Usado para los reintentos en un determinado tiempo. 
+* **Bottleneck:** Programador de tareas y limitador de velocidad. Usado para los reintentos en un determinado tiempo. 
 * **Sequelize:** ORM para PostgreSQL, Oracle, MySQL, MariaDB, SQLite and SQL Server.
 * **crypto-js:** Librería para operaciones de encriptación.
 * **Nodemon:** Para que se reinicie el servidor automáticamente después de cada cambio.
