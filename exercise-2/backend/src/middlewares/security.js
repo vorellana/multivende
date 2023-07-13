@@ -33,7 +33,7 @@ const verifyToken = async (req, res, next) => {
     TokenManager.setToken(validToken, null);
   } catch (error) {
     console.log(error);
-    return res.status(500).send("¡Algo salió mal!");
+    return res.status(500).send("Sucedió un error al verificar el token");
   }
   next();
 };

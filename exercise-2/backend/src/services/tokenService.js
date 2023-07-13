@@ -77,7 +77,7 @@ const authenticate = async (headers, refreshToken) => {
       data["code"] = headers.code;
       data["grant_type"] = "authorization_code";
     }
-
+    // console.log('1157. Datos de acceso: ', {url, headers, data })
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -85,6 +85,9 @@ const authenticate = async (headers, refreshToken) => {
       },
       body: JSON.stringify(data),
     });
+
+    console.log('1157. Datos retorno: ', response.status)
+    console.log({response});
 
     const responseJson = await response.json();
     if (response.status === 200) {
@@ -98,7 +101,7 @@ const authenticate = async (headers, refreshToken) => {
       return null;
     }
   } catch (error) {
-    console.log(error);
+    console.log('Error: token.service.js Authenticate: ', error);
   }
 };
 
